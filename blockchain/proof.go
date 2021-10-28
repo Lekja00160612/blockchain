@@ -17,7 +17,7 @@ import (
 
 // requirements: first few byres must contain 0s more 0s means greater difficulty
 
-const Difficulty = 16 // requirements
+const Difficulty = 18 // requirements
 
 type ProofOfWork struct {
 	Block  *Block
@@ -35,7 +35,7 @@ func (pow *ProofOfWork) InitData(nounce int) []byte {
 	data := bytes.Join(
 		[][]byte{
 			pow.Block.PrevHash,
-			pow.Block.Data,
+			pow.Block.HashTransactions(),
 			ToHex(int64(nounce)),
 			ToHex(int64(Difficulty)),
 		},
